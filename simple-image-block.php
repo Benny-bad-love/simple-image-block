@@ -1,15 +1,14 @@
 <?php
 /**
  * Plugin Name:       Simple Image Block
- * Description:       Simple Image Block provides a straightforward way to add images to your WordPress content without extra div wrappers or unnecessary markup.
+ * Description:       Super simple image block, no wrapper.
  * Requires at least: 6.6
  * Requires PHP:      7.2
- * Version:           0.1.2
+ * Version:           0.1.3
  * Author:            Ben Grave
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       simple-image-block
- * GitHub Plugin URI: Benny-bad-love/simple-image-block
  *
  * @package CreateBlock
  */
@@ -19,12 +18,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Include the update checker
-require_once plugin_dir_path( __FILE__ ) . 'includes/plugin-update-checker.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/plugin-updater.php';
 
 // Initialize the update checker with your GitHub repository details
-if ( class_exists( 'SimpleImageBlock_UpdateChecker' ) ) {
-	new SimpleImageBlock_UpdateChecker(
+if ( class_exists( 'Simple_Image_Block_Updater' ) ) {
+	$plugin_data = get_file_data( __FILE__, array( 'Version' => 'Version' ) );
+	new Simple_Image_Block_Updater(
 		__FILE__,
+		$plugin_data['Version'],
 		'Benny-bad-love', // Replace with your GitHub username
 		'simple-image-block'    // Your repository name
 	);

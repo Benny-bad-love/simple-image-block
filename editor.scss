@@ -1,0 +1,93 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-create-block-adv-image-block {
+	outline: 1px dotted #ddd;
+	max-width: 100%;
+
+	&.adv-image-block__image {
+		box-sizing: border-box;
+	}
+
+	&.adv-image-block__loading-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 150px;
+		background-color: #f8f9fa;
+	}
+}
+
+.adv-image-block__upload-button {
+	display: block;
+	width: 100%;
+	padding: 20px;
+	text-align: center;
+	background-color: #f7f7f7;
+	border: 1px dashed #ccc;
+	border-radius: 4px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #f0f0f0;
+		border-color: #999;
+	}
+}
+
+.adv-image-block__loading {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: #f8f9fa;
+	border-radius: 4px;
+
+	.components-spinner {
+		margin-right: 10px;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+.adv-image-block__size-selector {
+	margin-bottom: 15px;
+
+	.adv-image-block__size-select {
+		margin-bottom: 5px;
+	}
+
+	.adv-image-block__size-help {
+		font-size: 12px;
+		color: #757575;
+		margin: 5px 0 0;
+	}
+}
+
+.adv-image-block__individual-margins-title {
+	font-size: 13px;
+	font-weight: 500;
+	margin: 0 0 8px;
+	color: #1e1e1e;
+}
+
+// Border radius unit control
+.components-unit-control-wrapper {
+	.components-base-control__field {
+		margin-bottom: 0;
+	}
+}
+
+.components-select-control.components-border-radius-control__unit-control {
+	min-width: 70px;
+	margin-left: 10px;
+
+	.components-select-control__input {
+		min-width: auto;
+		padding-right: 25px;
+	}
+}

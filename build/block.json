@@ -1,0 +1,96 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/simple-image-block",
+  "version": "0.1.0",
+  "title": "Simple Image Block",
+  "category": "media",
+  "icon": "format-image",
+  "description": "A custom image block with extensive styling options",
+  "supports": {
+    "html": false,
+    "align": true
+  },
+  "attributes": {
+    "url": {
+      "type": "string",
+      "source": "attribute",
+      "selector": "img",
+      "attribute": "src"
+    },
+    "alt": {
+      "type": "string",
+      "source": "attribute",
+      "selector": "img",
+      "attribute": "alt",
+      "default": ""
+    },
+    "id": {
+      "type": "number"
+    },
+    "imageSize": {
+      "type": "string",
+      "default": "full"
+    },
+    "width": {
+      "type": "string"
+    },
+    "height": {
+      "type": "string"
+    },
+    "sizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "aspectRatio": {
+      "type": "string"
+    },
+    "objectFit": {
+      "type": "string",
+      "default": "cover"
+    },
+    "borderRadius": {
+      "type": "string",
+      "default": "0"
+    },
+    "borderRadiusUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "borderWidth": {
+      "type": "string",
+      "default": "0"
+    },
+    "borderStyle": {
+      "type": "string",
+      "default": "solid"
+    },
+    "borderColor": {
+      "type": "string"
+    },
+    "marginTop": {
+      "type": "string",
+      "default": "0"
+    },
+    "marginRight": {
+      "type": "string",
+      "default": "0"
+    },
+    "marginBottom": {
+      "type": "string",
+      "default": "0"
+    },
+    "marginLeft": {
+      "type": "string",
+      "default": "0"
+    },
+    "marginUnit": {
+      "type": "string",
+      "default": "px"
+    }
+  },
+  "textdomain": "simple-image-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

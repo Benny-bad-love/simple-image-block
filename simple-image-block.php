@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:       Simple Image Block
- * Description:       Super simple image block, no wrapper.
+ * Description:       Simple Image Block provides a straightforward way to add images to your WordPress content without extra div wrappers or unnecessary markup.
  * Requires at least: 6.6
  * Requires PHP:      7.2
- * Version:           0.1.1
+ * Version:           0.1.2
  * Author:            Ben Grave
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html

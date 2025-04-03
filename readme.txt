@@ -78,3 +78,6 @@ Initial release
 
 = 0.1.1 =
 * Added GitHub update checker
+
+= 0.1.2 =
+* New description for the plugin

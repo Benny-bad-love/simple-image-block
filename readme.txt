@@ -1,55 +1,80 @@
 === Simple Image Block ===
 Contributors:      The WordPress Contributors
-Tags:              block
+Tags:              block, image, gutenberg, media
 Tested up to:      6.6
-Stable tag:        0.1.0
+Stable tag:        0.1.1
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+A simple, clean image block without unnecessary wrappers - just the image you need.
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Simple Image Block provides a straightforward way to add images to your WordPress content without extra div wrappers or unnecessary markup.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+Features include:
+* Clean image implementation with no extra wrapper elements
+* Extensive styling options including border, margin, and radius controls
+* Aspect ratio control for consistent image displays
+* Object fit properties (cover, contain, fill, etc.)
+* Full support for alt text and accessibility
+* Image size selection from WordPress media library sizes
+* Width and height controls with various unit options
+* Automatic updates from GitHub repository
+* Lightweight and optimized for performance
+
+For developers, this block follows WordPress coding standards and provides a clean, semantic HTML output that's easy to style with your theme.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
 1. Upload the plugin files to the `/wp-content/plugins/simple-image-block` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
+2. Activate the plugin through the 'Plugins' screen in WordPress
+3. Add the Simple Image Block in the block editor
+4. The plugin will automatically check for updates from the GitHub repository
 
+== Usage ==
+
+1. In the WordPress block editor, click the + icon to add a new block
+2. Search for "Simple Image" and select the Simple Image Block
+3. Upload or select an image from your media library
+4. Use the block toolbar and sidebar panel to customize the image display
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= How is this different from the core WordPress image block? =
 
-An answer to that question.
+The Simple Image Block provides a cleaner HTML output without wrapper divs, while offering advanced styling options like aspect ratio control, object-fit properties, and comprehensive border/margin settings in one convenient interface.
 
-= What about foo bar? =
+= Can I control the size of the image? =
 
-Answer to foo bar dilemma.
+Yes! You can select from your WordPress-defined image sizes, or set custom width and height values with various unit options (px, %, em, rem, etc.).
+
+= Does this block support responsive images? =
+
+Yes, the block outputs standard img tags that will respond to your theme's responsive design.
+
+= Does this plugin support automatic updates? =
+
+Yes! The plugin will check for updates from the GitHub repository automatically.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Block settings showing image options
+2. Border and margin controls
+3. Example of a styled image with border radius and custom border
 
 == Changelog ==
 
 = 0.1.0 =
-* Release
+* Initial release
+* Basic image functionality
+* Styling options including border, radius, and margin controls
+* Aspect ratio and object fit settings
 
-== Arbitrary section ==
+== Upgrade Notice ==
 
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+= 0.1.0 =
+Initial release
+
+= 0.1.1 =
+* Added GitHub update checker

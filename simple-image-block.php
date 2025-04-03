@@ -4,17 +4,30 @@
  * Description:       Super simple image block, no wrapper.
  * Requires at least: 6.6
  * Requires PHP:      7.2
- * Version:           0.1.0
- * Author:            The WordPress Contributors
+ * Version:           0.1.1
+ * Author:            Ben Grave
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       simple-image-block
+ * GitHub Plugin URI: Benny-bad-love/simple-image-block
  *
  * @package CreateBlock
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
+}
+
+// Include the update checker
+require_once plugin_dir_path( __FILE__ ) . 'includes/plugin-update-checker.php';
+
+// Initialize the update checker with your GitHub repository details
+if ( class_exists( 'SimpleImageBlock_UpdateChecker' ) ) {
+	new SimpleImageBlock_UpdateChecker(
+		__FILE__,
+		'Benny-bad-love', // Replace with your GitHub username
+		'simple-image-block'    // Your repository name
+	);
 }
 
 /**
@@ -24,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function create_block_adv_image_block_block_init() {
+function create_block_simple_image_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'create_block_adv_image_block_block_init' );
+add_action( 'init', 'create_block_simple_image_block_init' );

@@ -4,15 +4,15 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-adv-image-block {
+.wp-block-create-block-simple-image-block {
 	outline: 1px dotted #ddd;
 	max-width: 100%;
 
-	&.adv-image-block__image {
+	&.simple-image-block__image {
 		box-sizing: border-box;
 	}
 
-	&.adv-image-block__loading-container {
+	&.simple-image-block__loading-container {
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -21,7 +21,7 @@
 	}
 }
 
-.adv-image-block__upload-button {
+.simple-image-block__upload-button {
 	display: block;
 	width: 100%;
 	padding: 20px;
@@ -37,7 +37,7 @@
 	}
 }
 
-.adv-image-block__loading {
+.simple-image-block__loading {
 	display: flex;
 	align-items: center;
 	padding: 10px;
@@ -54,21 +54,21 @@
 	}
 }
 
-.adv-image-block__size-selector {
+.simple-image-block__size-selector {
 	margin-bottom: 15px;
 
-	.adv-image-block__size-select {
+	.simple-image-block__size-select {
 		margin-bottom: 5px;
 	}
 
-	.adv-image-block__size-help {
+	.simple-image-block__size-help {
 		font-size: 12px;
 		color: #757575;
 		margin: 5px 0 0;
 	}
 }
 
-.adv-image-block__individual-margins-title {
+.simple-image-block__individual-margins-title {
 	font-size: 13px;
 	font-weight: 500;
 	margin: 0 0 8px;

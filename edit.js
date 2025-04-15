@@ -278,7 +278,7 @@ export default function Edit({ attributes, setAttributes }) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__('Image Settings', 'adv-image-block')} initialOpen={true}>
+				<PanelBody title={__('Image Settings', 'simple-image-block')} initialOpen={true}>
 					<MediaUploadCheck>
 						<MediaUpload
 							onSelect={onSelectImage}
@@ -291,7 +291,7 @@ export default function Edit({ attributes, setAttributes }) {
 									className="editor-media-placeholder__button"
 									style={{ marginBottom: '12px', display: 'block', width: '100%' }}
 								>
-									{!url ? __('Select Image', 'adv-image-block') : __('Replace Image', 'adv-image-block')}
+									{!url ? __('Select Image', 'simple-image-block') : __('Replace Image', 'simple-image-block')}
 								</Button>
 							)}
 						/>
@@ -299,36 +299,36 @@ export default function Edit({ attributes, setAttributes }) {
 					{url && (
 						<>
 							{isLoadingImage ? (
-								<div className="adv-image-block__loading">
+								<div className="simple-image-block__loading">
 									<Spinner />
-									<p>{__('Loading image...', 'adv-image-block')}</p>
+									<p>{__('Loading image...', 'simple-image-block')}</p>
 								</div>
 							) : (
 								availableSizes.length > 0 && (
-									<div className="adv-image-block__size-selector">
+									<div className="simple-image-block__size-selector">
 										<SelectControl
-											label={__('Image Size', 'adv-image-block')}
+											label={__('Image Size', 'simple-image-block')}
 											value={imageSize || 'full'}
 											options={availableSizes}
 											onChange={onSelectSize}
-											className="adv-image-block__size-select"
+											className="simple-image-block__size-select"
 										/>
-										<p className="adv-image-block__size-help">
-											{__('Select the size of the image to display.', 'adv-image-block')}
+										<p className="simple-image-block__size-help">
+											{__('Select the size of the image to display.', 'simple-image-block')}
 										</p>
 									</div>
 								)
 							)}
 
 							<TextControl
-								label={__('Alt Text', 'adv-image-block')}
+								label={__('Alt Text', 'simple-image-block')}
 								value={alt}
 								onChange={(value) => setAttributes({ alt: value })}
-								help={__('Alternative text describes your image to people who cannot see it.', 'adv-image-block')}
+								help={__('Alternative text describes your image to people who cannot see it.', 'simple-image-block')}
 							/>
 							<div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
 								<UnitControl
-									label={__('Width', 'adv-image-block')}
+									label={__('Width', 'simple-image-block')}
 									value={width ? width + sizeUnit : ''}
 									onChange={(value) => {
 										if (!value) {
@@ -349,7 +349,7 @@ export default function Edit({ attributes, setAttributes }) {
 									]}
 								/>
 								<UnitControl
-									label={__('Height', 'adv-image-block')}
+									label={__('Height', 'simple-image-block')}
 									value={height ? height + sizeUnit : ''}
 									onChange={(value) => {
 										if (!value) {
@@ -372,14 +372,14 @@ export default function Edit({ attributes, setAttributes }) {
 							</div>
 
 							<TextControl
-								label={__('Aspect Ratio', 'adv-image-block')}
-								help={__('e.g., 16/9, 4/3, 1/1', 'adv-image-block')}
+								label={__('Aspect Ratio', 'simple-image-block')}
+								help={__('e.g., 16/9, 4/3, 1/1', 'simple-image-block')}
 								value={aspectRatio || ''}
 								onChange={(value) => setAttributes({ aspectRatio: value })}
 							/>
 
 							<SelectControl
-								label={__('Object Fit', 'adv-image-block')}
+								label={__('Object Fit', 'simple-image-block')}
 								value={objectFit}
 								options={objectFitOptions}
 								onChange={(value) => setAttributes({ objectFit: value })}
@@ -387,7 +387,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 							<div style={{ marginBottom: '24px' }}>
 								<div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-									<span>{__('Border Radius', 'adv-image-block')}</span>
+									<span>{__('Border Radius', 'simple-image-block')}</span>
 									<SelectControl
 										value={borderRadiusUnit}
 										options={borderRadiusUnitOptions}
@@ -405,9 +405,9 @@ export default function Edit({ attributes, setAttributes }) {
 								/>
 							</div>
 
-							<PanelBody title={__('Border Settings', 'adv-image-block')} initialOpen={false}>
+							<PanelBody title={__('Border Settings', 'simple-image-block')} initialOpen={false}>
 								<RangeControl
-									label={__('Border Width', 'adv-image-block')}
+									label={__('Border Width', 'simple-image-block')}
 									value={parseInt(borderWidth) || 0}
 									onChange={(value) => setAttributes({ borderWidth: value.toString() })}
 									min={0}
@@ -415,14 +415,14 @@ export default function Edit({ attributes, setAttributes }) {
 								/>
 
 								<SelectControl
-									label={__('Border Style', 'adv-image-block')}
+									label={__('Border Style', 'simple-image-block')}
 									value={borderStyle}
 									options={borderStyleOptions}
 									onChange={(value) => setAttributes({ borderStyle: value })}
 								/>
 
 								<div>
-									<p>{__('Border Color', 'adv-image-block')}</p>
+									<p>{__('Border Color', 'simple-image-block')}</p>
 									<ColorPalette
 										value={borderColor}
 										onChange={(color) => setAttributes({ borderColor: color })}
@@ -430,43 +430,43 @@ export default function Edit({ attributes, setAttributes }) {
 								</div>
 							</PanelBody>
 
-							<PanelBody title={__('Margin Settings', 'adv-image-block')} initialOpen={false}>
+							<PanelBody title={__('Margin Settings', 'simple-image-block')} initialOpen={false}>
 								<div>
 									<UnitControl
-										label={__('All Margins', 'adv-image-block')}
+										label={__('All Margins', 'simple-image-block')}
 										value={marginTop === marginRight && marginTop === marginBottom && marginTop === marginLeft ?
 											marginTop + marginUnit : ''}
 										onChange={updateAllMargins}
 										units={unitOptions}
-										help={__('Set all margins at once or use individual controls below.', 'adv-image-block')}
+										help={__('Set all margins at once or use individual controls below.', 'simple-image-block')}
 									/>
 								</div>
 
 								<div style={{ marginTop: '16px' }}>
-									<h3 className="adv-image-block__individual-margins-title">
-										{__('Individual Margins', 'adv-image-block')}
+									<h3 className="simple-image-block__individual-margins-title">
+										{__('Individual Margins', 'simple-image-block')}
 									</h3>
 									<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '8px' }}>
 										<UnitControl
-											label={__('Top', 'adv-image-block')}
+											label={__('Top', 'simple-image-block')}
 											value={marginTop + marginUnit}
 											onChange={(value) => updateMargin(value, 'Top')}
 											units={unitOptions}
 										/>
 										<UnitControl
-											label={__('Right', 'adv-image-block')}
+											label={__('Right', 'simple-image-block')}
 											value={marginRight + marginUnit}
 											onChange={(value) => updateMargin(value, 'Right')}
 											units={unitOptions}
 										/>
 										<UnitControl
-											label={__('Bottom', 'adv-image-block')}
+											label={__('Bottom', 'simple-image-block')}
 											value={marginBottom + marginUnit}
 											onChange={(value) => updateMargin(value, 'Bottom')}
 											units={unitOptions}
 										/>
 										<UnitControl
-											label={__('Left', 'adv-image-block')}
+											label={__('Left', 'simple-image-block')}
 											value={marginLeft + marginUnit}
 											onChange={(value) => updateMargin(value, 'Left')}
 											units={unitOptions}
@@ -490,9 +490,9 @@ export default function Edit({ attributes, setAttributes }) {
 								{...blockProps}
 								onClick={open}
 								variant="secondary"
-								className={`${blockProps.className || ''} adv-image-block__upload-button`.trim()}
+								className={`${blockProps.className || ''} simple-image-block__upload-button`.trim()}
 							>
-								{__('Upload Image', 'adv-image-block')}
+								{__('Upload Image', 'simple-image-block')}
 							</Button>
 						)}
 					/>
@@ -500,7 +500,7 @@ export default function Edit({ attributes, setAttributes }) {
 			) : (
 				<>
 					{isLoadingImage ? (
-						<div {...blockProps} className={`${blockProps.className || ''} adv-image-block__loading-container`.trim()}>
+						<div {...blockProps} className={`${blockProps.className || ''} simple-image-block__loading-container`.trim()}>
 							<Spinner />
 						</div>
 					) : (
@@ -509,7 +509,7 @@ export default function Edit({ attributes, setAttributes }) {
 							src={url}
 							alt={alt}
 							style={imageStyle}
-							className={`${blockProps.className || ''} adv-image-block__image`.trim()}
+							className={`${blockProps.className || ''} simple-image-block__image`.trim()}
 						/>
 					)}
 				</>

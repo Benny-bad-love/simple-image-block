@@ -66,7 +66,7 @@ export default function save({ attributes }) {
 			src={url}
 			alt={alt || ''}
 			style={imageStyle}
-			className={`${blockProps.className || ''} adv-image-block__image`.trim()}
+			className={`${blockProps.className || ''} simple-image-block__image`.trim()}
 		/>
 	);
 }

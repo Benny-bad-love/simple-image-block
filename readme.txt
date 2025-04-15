@@ -83,4 +83,4 @@ Initial release
 * New description for the plugin
 
 = 0.1.3 =
-* Added new updater and plugin banners
+* Added support for custom width and height

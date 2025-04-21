@@ -84,3 +84,6 @@ Initial release
 
 = 0.1.3 =
 * Added support for custom width and height
+
+= 0.1.4 =
+* Added support for max width and max height

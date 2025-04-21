@@ -60,6 +60,10 @@ export default function Edit({ attributes, setAttributes }) {
 		width,
 		height,
 		sizeUnit,
+		maxWidth,
+		maxHeight,
+		maxWidthUnit,
+		maxHeightUnit,
 		aspectRatio,
 		objectFit,
 		borderRadius,
@@ -230,6 +234,8 @@ export default function Edit({ attributes, setAttributes }) {
 	const imageStyle = {
 		width: width ? width + sizeUnit : undefined,
 		height: height ? height + sizeUnit : undefined,
+		maxWidth: maxWidth ? maxWidth + maxWidthUnit : undefined,
+		maxHeight: maxHeight ? maxHeight + maxHeightUnit : undefined,
 		aspectRatio: aspectRatio || undefined,
 		objectFit: objectFit || undefined,
 		borderRadius: borderRadius ? borderRadius + borderRadiusUnit : undefined,
@@ -259,7 +265,7 @@ export default function Edit({ attributes, setAttributes }) {
 		{ value: 'ridge', label: 'Ridge' },
 		{ value: 'inset', label: 'Inset' },
 		{ value: 'outset', label: 'Outset' },
-];
+	];
 
 	const unitOptions = [
 		{ value: 'px', label: 'px' },
@@ -326,6 +332,8 @@ export default function Edit({ attributes, setAttributes }) {
 								onChange={(value) => setAttributes({ alt: value })}
 								help={__('Alternative text describes your image to people who cannot see it.', 'simple-image-block')}
 							/>
+
+							{/* Width and Height controls in one row */}
 							<div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
 								<UnitControl
 									label={__('Width', 'simple-image-block')}
@@ -361,6 +369,52 @@ export default function Edit({ attributes, setAttributes }) {
 										setAttributes({
 											height: numericValue,
 											sizeUnit: unit || 'px'
+										});
+									}}
+									units={[
+										{ value: 'px', label: 'px' },
+										{ value: '%', label: '%' },
+										{ value: 'vh', label: 'vh' },
+									]}
+								/>
+							</div>
+
+							{/* Max Width and Max Height controls in another row */}
+							<div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+								<UnitControl
+									label={__('Max Width', 'simple-image-block')}
+									value={maxWidth ? maxWidth + maxWidthUnit : ''}
+									onChange={(value) => {
+										if (!value) {
+											setAttributes({ maxWidth: undefined });
+											return;
+										}
+										const numericValue = value.replace(/[^\d.\-]/g, '');
+										const unit = value.replace(/[0-9.\-]/g, '');
+										setAttributes({
+											maxWidth: numericValue,
+											maxWidthUnit: unit || 'px'
+										});
+									}}
+									units={[
+										{ value: 'px', label: 'px' },
+										{ value: '%', label: '%' },
+										{ value: 'vw', label: 'vw' },
+									]}
+								/>
+								<UnitControl
+									label={__('Max Height', 'simple-image-block')}
+									value={maxHeight ? maxHeight + maxHeightUnit : ''}
+									onChange={(value) => {
+										if (!value) {
+											setAttributes({ maxHeight: undefined });
+											return;
+										}
+										const numericValue = value.replace(/[^\d.\-]/g, '');
+										const unit = value.replace(/[0-9.\-]/g, '');
+										setAttributes({
+											maxHeight: numericValue,
+											maxHeightUnit: unit || 'px'
 										});
 									}}
 									units={[

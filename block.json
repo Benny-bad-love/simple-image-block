@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "create-block/simple-image-block",
 	"version": "0.1.0",
-	"title": "Advanced Image Block",
+	"title": "Simple Image Block",
 	"category": "media",
 	"icon": "format-image",
 	"description": "A custom image block with extensive styling options",

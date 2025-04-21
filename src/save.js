@@ -37,6 +37,8 @@ export default function save({ attributes }) {
 		marginUnit,
 		maxWidth,
 		maxHeight,
+		maxWidthUnit,
+		maxHeightUnit,
 	} = attributes;
 
 	// Return null if no image URL is set
@@ -47,8 +49,8 @@ export default function save({ attributes }) {
 	const imageStyle = {
 		width: width ? width + sizeUnit : undefined,
 		height: height ? height + sizeUnit : undefined,
-		maxWidth: maxWidth ? maxWidth + sizeUnit : undefined,
-		maxHeight: maxHeight ? maxHeight + sizeUnit : undefined,
+		maxWidth: maxWidth ? maxWidth + maxWidthUnit : undefined,
+		maxHeight: maxHeight ? maxHeight + maxHeightUnit : undefined,
 		aspectRatio: aspectRatio || undefined,
 		objectFit: objectFit || undefined,
 		borderRadius: borderRadius ? borderRadius + borderRadiusUnit : undefined,

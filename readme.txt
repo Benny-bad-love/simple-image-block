@@ -2,7 +2,7 @@
 Contributors:      The WordPress Contributors
 Tags:              block, image, gutenberg, media
 Tested up to:      6.6
-Stable tag:        0.1.1
+Stable tag:        0.1.5
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,4 +86,7 @@ Initial release
 * Added support for custom width and height
 
 = 0.1.4 =
-* Added support for max width and max height
+* Added support for custom max-width and max-height
+
+= 0.1.5 =
+* Fixed units not applying correctly on max-width and max-height

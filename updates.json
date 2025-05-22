@@ -1,8 +1,8 @@
 {
-    "version": "0.1.5",
+    "version": "0.1.6",
     "download_url": "https://github.com/Benny-bad-love/simple-image-block/archive/refs/heads/main.zip",
     "requires": "6.0",
     "tested": "6.6",
     "requires_php": "7.2",
-    "last_updated": "2025-04-22"
+    "last_updated": "2025-05-22"
 }

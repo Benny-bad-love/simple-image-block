@@ -21,6 +21,8 @@ export default function save({ attributes }) {
 		alt,
 		width,
 		height,
+		minWidth,
+		minHeight,
 		sizeUnit,
 		aspectRatio,
 		objectFit,
@@ -45,6 +47,8 @@ export default function save({ attributes }) {
 	const imageStyle = {
 		width: width ? width + sizeUnit : undefined,
 		height: height ? height + sizeUnit : undefined,
+		minWidth: minWidth ? minWidth + sizeUnit : undefined,
+		minHeight: minHeight ? minHeight + sizeUnit : undefined,
 		aspectRatio: aspectRatio || undefined,
 		objectFit: objectFit || undefined,
 		borderRadius: borderRadius ? borderRadius + borderRadiusUnit : undefined,

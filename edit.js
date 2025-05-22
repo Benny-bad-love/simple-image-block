@@ -59,6 +59,8 @@ export default function Edit({ attributes, setAttributes }) {
 		id,
 		width,
 		height,
+		minWidth,
+		minHeight,
 		sizeUnit,
 		aspectRatio,
 		objectFit,
@@ -230,6 +232,8 @@ export default function Edit({ attributes, setAttributes }) {
 	const imageStyle = {
 		width: width ? width + sizeUnit : undefined,
 		height: height ? height + sizeUnit : undefined,
+		minWidth: minWidth ? minWidth + sizeUnit : undefined,
+		minHeight: minHeight ? minHeight + sizeUnit : undefined,
 		aspectRatio: aspectRatio || undefined,
 		objectFit: objectFit || undefined,
 		borderRadius: borderRadius ? borderRadius + borderRadiusUnit : undefined,
@@ -360,6 +364,51 @@ export default function Edit({ attributes, setAttributes }) {
 										const unit = value.replace(/[0-9.]/g, '');
 										setAttributes({
 											height: numericValue,
+											sizeUnit: unit || 'px'
+										});
+									}}
+									units={[
+										{ value: 'px', label: 'px' },
+										{ value: '%', label: '%' },
+										{ value: 'vh', label: 'vh' },
+									]}
+								/>
+							</div>
+
+							<div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+								<UnitControl
+									label={__('Min Width', 'simple-image-block')}
+									value={minWidth ? minWidth + sizeUnit : ''}
+									onChange={(value) => {
+										if (!value) {
+											setAttributes({ minWidth: undefined });
+											return;
+										}
+										const numericValue = value.replace(/[^0-9.]/g, '');
+										const unit = value.replace(/[0-9.]/g, '');
+										setAttributes({
+											minWidth: numericValue,
+											sizeUnit: unit || 'px'
+										});
+									}}
+									units={[
+										{ value: 'px', label: 'px' },
+										{ value: '%', label: '%' },
+										{ value: 'vw', label: 'vw' },
+									]}
+								/>
+								<UnitControl
+									label={__('Min Height', 'simple-image-block')}
+									value={minHeight ? minHeight + sizeUnit : ''}
+									onChange={(value) => {
+										if (!value) {
+											setAttributes({ minHeight: undefined });
+											return;
+										}
+										const numericValue = value.replace(/[^0-9.]/g, '');
+										const unit = value.replace(/[0-9.]/g, '');
+										setAttributes({
+											minHeight: numericValue,
 											sizeUnit: unit || 'px'
 										});
 									}}

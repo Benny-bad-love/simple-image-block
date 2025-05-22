@@ -38,6 +38,12 @@
 		"height": {
 			"type": "string"
 		},
+		"minWidth": {
+			"type": "string"
+		},
+		"minHeight": {
+			"type": "string"
+		},
 		"sizeUnit": {
 			"type": "string",
 			"default": "px"

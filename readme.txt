@@ -99,3 +99,6 @@ Initial release
 
 = 0.1.8 =
 * Fix for fields not saving correctly
+
+= 0.1.9 =
+* Fixing the fields not saving correctly... again.

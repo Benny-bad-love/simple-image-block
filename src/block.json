@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "create-block/simple-image-block",
-	"version": "0.1.7",
+	"version": "0.1.9",
 	"title": "Simple Image Block",
 	"category": "media",
 	"icon": "format-image",
@@ -99,6 +99,20 @@
 			"default": "px"
 		},
 		"maxHeightUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"minWidth": {
+			"type": "string"
+		},
+		"minHeight": {
+			"type": "string"
+		},
+		"minWidthUnit": {
+			"type": "string",
+			"default": "px"
+		},
+		"minHeightUnit": {
 			"type": "string",
 			"default": "px"
 		}

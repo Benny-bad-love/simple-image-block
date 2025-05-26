@@ -96,3 +96,6 @@ Initial release
 
 = 0.1.7 =
 * Fix for the block not working in the editor
+
+= 0.1.8 =
+* Fix for fields not saving correctly

@@ -60,6 +60,14 @@ export default function Edit({ attributes, setAttributes }) {
 		width,
 		height,
 		sizeUnit,
+		maxWidth,
+		maxHeight,
+		maxWidthUnit,
+		maxHeightUnit,
+		minWidth,
+		minHeight,
+		minWidthUnit,
+		minHeightUnit,
 		aspectRatio,
 		objectFit,
 		borderRadius,
@@ -230,6 +238,10 @@ export default function Edit({ attributes, setAttributes }) {
 	const imageStyle = {
 		width: width ? width + sizeUnit : undefined,
 		height: height ? height + sizeUnit : undefined,
+		maxWidth: maxWidth ? maxWidth + maxWidthUnit : undefined,
+		maxHeight: maxHeight ? maxHeight + maxHeightUnit : undefined,
+		minWidth: minWidth ? minWidth + minWidthUnit : undefined,
+		minHeight: minHeight ? minHeight + minHeightUnit : undefined,
 		aspectRatio: aspectRatio || undefined,
 		objectFit: objectFit || undefined,
 		borderRadius: borderRadius ? borderRadius + borderRadiusUnit : undefined,
@@ -361,6 +373,52 @@ export default function Edit({ attributes, setAttributes }) {
 										setAttributes({
 											height: numericValue,
 											sizeUnit: unit || 'px'
+										});
+									}}
+									units={[
+										{ value: 'px', label: 'px' },
+										{ value: '%', label: '%' },
+										{ value: 'vh', label: 'vh' },
+									]}
+								/>
+							</div>
+
+							{/* Min Width and Min Height controls in another row */}
+							<div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
+								<UnitControl
+									label={__('Min Width', 'simple-image-block')}
+									value={minWidth ? minWidth + minWidthUnit : ''}
+									onChange={(value) => {
+										if (!value) {
+											setAttributes({ minWidth: undefined });
+											return;
+										}
+										const numericValue = value.replace(/[^\d.\-]/g, '');
+										const unit = value.replace(/[0-9.\-]/g, '');
+										setAttributes({
+											minWidth: numericValue,
+											minWidthUnit: unit || 'px'
+										});
+									}}
+									units={[
+										{ value: 'px', label: 'px' },
+										{ value: '%', label: '%' },
+										{ value: 'vw', label: 'vw' },
+									]}
+								/>
+								<UnitControl
+									label={__('Min Height', 'simple-image-block')}
+									value={minHeight ? minHeight + minHeightUnit : ''}
+									onChange={(value) => {
+										if (!value) {
+											setAttributes({ minHeight: undefined });
+											return;
+										}
+										const numericValue = value.replace(/[^\d.\-]/g, '');
+										const unit = value.replace(/[0-9.\-]/g, '');
+										setAttributes({
+											minHeight: numericValue,
+											minHeightUnit: unit || 'px'
 										});
 									}}
 									units={[

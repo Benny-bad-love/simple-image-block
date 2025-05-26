@@ -39,6 +39,10 @@ export default function save({ attributes }) {
 		maxHeight,
 		maxWidthUnit,
 		maxHeightUnit,
+		minWidth,
+		minWidthUnit,
+		minHeight,
+		minHeightUnit,
 	} = attributes;
 
 	// Return null if no image URL is set
@@ -51,6 +55,8 @@ export default function save({ attributes }) {
 		height: height ? height + sizeUnit : undefined,
 		maxWidth: maxWidth ? maxWidth + maxWidthUnit : undefined,
 		maxHeight: maxHeight ? maxHeight + maxHeightUnit : undefined,
+		minWidth: minWidth ? minWidth + minWidthUnit : undefined,
+		minHeight: minHeight ? minHeight + minHeightUnit : undefined,
 		aspectRatio: aspectRatio || undefined,
 		objectFit: objectFit || undefined,
 		borderRadius: borderRadius ? borderRadius + borderRadiusUnit : undefined,

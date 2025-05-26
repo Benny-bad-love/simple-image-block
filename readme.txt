@@ -2,7 +2,7 @@
 Contributors:      The WordPress Contributors
 Tags:              block, image, gutenberg, media
 Tested up to:      6.6
-Stable tag:        0.1.6
+Stable tag:        0.1.5
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,5 +92,7 @@ Initial release
 * Fixed units not applying correctly on max-width and max-height
 
 = 0.1.6 =
-* Added support for custom min-width and min-height
-* Fixed units not applying correctly on min-width and min-height
+* Added support for min-width and min-height
+
+= 0.1.7 =
+* Fix for the block not working in the editor

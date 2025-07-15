@@ -14,6 +14,7 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	InspectorControls,
+	InspectorAdvancedControls,
 	MediaUpload,
 	MediaUploadCheck,
 } from '@wordpress/block-editor';
@@ -42,6 +43,7 @@ import {
 	__experimentalBoxControl as BoxControl,
 	ColorPalette,
 	Spinner,
+	Notice,
 } from '@wordpress/components';
 
 /**
@@ -52,10 +54,11 @@ import {
  *
  * @return {Element} Element to render.
  */
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit({ attributes, setAttributes, context, isSelected }) {
 	const {
 		url,
 		alt,
+		title,
 		id,
 		width,
 		height,
@@ -87,6 +90,54 @@ export default function Edit({ attributes, setAttributes }) {
 	const [availableSizes, setAvailableSizes] = useState([]);
 
 	const blockProps = useBlockProps();
+
+	// Check if we're in a pattern context
+	const isInPattern = context?.['pattern/overrides'] !== undefined || context?.['core/pattern-overrides'] !== undefined;
+
+	// Check if any attributes are bound (pattern overrides)
+	// Handle both the metadata.bindings structure and direct attribute bindings
+	const metadata = attributes.metadata || {};
+	const bindings = metadata.bindings || {};
+
+	// Check for pattern override bindings using the core/pattern-overrides source
+	// Handle both specific attribute bindings and __default bindings
+	const isUrlBound = !!(
+		bindings.url?.source === 'core/pattern-overrides' ||
+		(bindings.__default?.source === 'core/pattern-overrides' && url !== undefined)
+	);
+	const isAltBound = !!(
+		bindings.alt?.source === 'core/pattern-overrides' ||
+		(bindings.__default?.source === 'core/pattern-overrides' && alt !== undefined)
+	);
+	const isTitleBound = !!(
+		bindings.title?.source === 'core/pattern-overrides' ||
+		(bindings.__default?.source === 'core/pattern-overrides' && title !== undefined)
+	);
+	const hasAnyBinding = isUrlBound || isAltBound || isTitleBound;
+
+	// Debug information for pattern overrides (always active for troubleshooting)
+	console.log('Simple Image Block Debug:', {
+		wordpressVersion: window.wp?.coreData?.getEntityRecord ? 'Modern WP' : 'Legacy WP',
+		currentEditor: window?.wp?.data?.select('core/editor') ? 'Post Editor' :
+					  window?.wp?.data?.select('core/edit-site') ? 'Site Editor' : 'Unknown',
+		contextRaw: context,
+		contextKeys: Object.keys(context || {}),
+		patternContext: context?.['pattern/overrides'],
+		corePatternContext: context?.['core/pattern-overrides'],
+		metadata,
+		bindings,
+		isUrlBound,
+		isAltBound,
+		isTitleBound,
+		hasAnyBinding,
+		isInPattern,
+		attributes: { url, alt, title },
+		blockName: 'create-block/simple-image-block',
+		// Add more WordPress environment info
+		wpVersion: window?.wp?.coreData?.VERSION || window?.wpApiSettings?.root || 'Unknown',
+		isBlockTheme: document.body.classList.contains('block-editor-page'),
+		currentPost: window?.wp?.data?.select('core/editor')?.getCurrentPost?.()?.type || 'Unknown'
+	});
 
 	// Fetch the full image data once the ID is available
 	const imageData = useSelect((select) => {
@@ -157,7 +208,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 	const onSelectImage = (media) => {
 		if (!media || !media.url) {
-			setAttributes({ url: undefined, id: undefined, alt: '' });
+			setAttributes({ url: undefined, id: undefined, alt: '', title: '' });
 			return;
 		}
 
@@ -168,6 +219,7 @@ export default function Edit({ attributes, setAttributes }) {
 			url: media.url,
 			id: media.id,
 			alt: media.alt || '',
+			title: media.title || '',
 			imageSize: 'full'
 		});
 
@@ -290,6 +342,22 @@ export default function Edit({ attributes, setAttributes }) {
 	return (
 		<>
 			<InspectorControls>
+				{hasAnyBinding && (
+					<PanelBody title={__('Pattern Overrides', 'simple-image-block')} initialOpen={true}>
+						<Notice status="info" isDismissible={false}>
+							<p>{__('This block is part of a synced pattern. Some attributes are connected to pattern overrides.', 'simple-image-block')}</p>
+						</Notice>
+						{isUrlBound && (
+							<p><strong>{__('Image URL:', 'simple-image-block')}</strong> {__('Connected to pattern override', 'simple-image-block')}</p>
+						)}
+						{isAltBound && (
+							<p><strong>{__('Alt Text:', 'simple-image-block')}</strong> {__('Connected to pattern override', 'simple-image-block')}</p>
+						)}
+						{isTitleBound && (
+							<p><strong>{__('Title:', 'simple-image-block')}</strong> {__('Connected to pattern override', 'simple-image-block')}</p>
+						)}
+					</PanelBody>
+				)}
 				<PanelBody title={__('Image Settings', 'simple-image-block')} initialOpen={true}>
 					<MediaUploadCheck>
 						<MediaUpload
@@ -302,8 +370,10 @@ export default function Edit({ attributes, setAttributes }) {
 									variant="primary"
 									className="editor-media-placeholder__button"
 									style={{ marginBottom: '12px', display: 'block', width: '100%' }}
+									disabled={isUrlBound}
 								>
 									{!url ? __('Select Image', 'simple-image-block') : __('Replace Image', 'simple-image-block')}
+									{isUrlBound && __(' (Disabled - Connected to pattern)', 'simple-image-block')}
 								</Button>
 							)}
 						/>
@@ -324,9 +394,11 @@ export default function Edit({ attributes, setAttributes }) {
 											options={availableSizes}
 											onChange={onSelectSize}
 											className="simple-image-block__size-select"
+											disabled={isUrlBound}
 										/>
 										<p className="simple-image-block__size-help">
 											{__('Select the size of the image to display.', 'simple-image-block')}
+											{isUrlBound && __(' (Disabled - Connected to pattern)', 'simple-image-block')}
 										</p>
 									</div>
 								)
@@ -337,7 +409,26 @@ export default function Edit({ attributes, setAttributes }) {
 								value={alt}
 								onChange={(value) => setAttributes({ alt: value })}
 								help={__('Alternative text describes your image to people who cannot see it.', 'simple-image-block')}
+								disabled={isAltBound}
 							/>
+							{isAltBound && (
+								<p className="simple-image-block__binding-notice">
+									{__('Alt text is connected to a pattern override.', 'simple-image-block')}
+								</p>
+							)}
+
+							<TextControl
+								label={__('Title', 'simple-image-block')}
+								value={title || ''}
+								onChange={(value) => setAttributes({ title: value })}
+								help={__('Title attribute for the image (tooltip text).', 'simple-image-block')}
+								disabled={isTitleBound}
+							/>
+							{isTitleBound && (
+								<p className="simple-image-block__binding-notice">
+									{__('Title is connected to a pattern override.', 'simple-image-block')}
+								</p>
+							)}
 
 							{/* Width and Height controls in one row */}
 							<div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
@@ -584,6 +675,10 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 			</InspectorControls>
+
+			<InspectorAdvancedControls>
+				{/* The "Enable overrides" button will be automatically added here by WordPress when in a synced pattern */}
+			</InspectorAdvancedControls>
 
 			{!url ? (
 				<MediaUploadCheck>

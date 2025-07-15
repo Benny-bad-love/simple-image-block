@@ -2,31 +2,52 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "create-block/simple-image-block",
-  "version": "0.1.9",
+  "version": "0.2.1",
   "title": "Simple Image Block",
   "category": "media",
   "icon": "format-image",
   "description": "A custom image block with extensive styling options",
   "supports": {
     "html": false,
-    "align": true
+    "align": true,
+    "interactivity": {
+      "clientNavigation": true
+    },
+    "lock": false,
+    "__experimentalBind": [
+      "url",
+      "alt",
+      "title"
+    ]
   },
   "attributes": {
     "url": {
       "type": "string",
       "source": "attribute",
       "selector": "img",
-      "attribute": "src"
+      "attribute": "src",
+      "role": "content"
     },
     "alt": {
       "type": "string",
       "source": "attribute",
       "selector": "img",
       "attribute": "alt",
-      "default": ""
+      "default": "",
+      "role": "content"
+    },
+    "title": {
+      "type": "string",
+      "source": "attribute",
+      "selector": "img",
+      "attribute": "title",
+      "role": "content"
     },
     "id": {
       "type": "number"
+    },
+    "metadata": {
+      "type": "object"
     },
     "imageSize": {
       "type": "string",
@@ -39,6 +60,34 @@
       "type": "string"
     },
     "sizeUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "maxWidth": {
+      "type": "string"
+    },
+    "maxHeight": {
+      "type": "string"
+    },
+    "maxWidthUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "maxHeightUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "minWidth": {
+      "type": "string"
+    },
+    "minHeight": {
+      "type": "string"
+    },
+    "minWidthUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "minHeightUnit": {
       "type": "string",
       "default": "px"
     },
@@ -87,38 +136,16 @@
     "marginUnit": {
       "type": "string",
       "default": "px"
-    },
-    "maxWidth": {
-      "type": "string"
-    },
-    "maxHeight": {
-      "type": "string"
-    },
-    "maxWidthUnit": {
-      "type": "string",
-      "default": "px"
-    },
-    "maxHeightUnit": {
-      "type": "string",
-      "default": "px"
-    },
-    "minWidth": {
-      "type": "string"
-    },
-    "minHeight": {
-      "type": "string"
-    },
-    "minWidthUnit": {
-      "type": "string",
-      "default": "px"
-    },
-    "minHeightUnit": {
-      "type": "string",
-      "default": "px"
     }
   },
   "textdomain": "simple-image-block",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "style": "file:./style-index.css",
+  "usesContext": [
+    "pattern/overrides",
+    "core/pattern-overrides",
+    "postId",
+    "postType"
+  ]
 }

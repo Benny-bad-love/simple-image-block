@@ -19,6 +19,7 @@ export default function save({ attributes }) {
 	const {
 		url,
 		alt,
+		title,
 		width,
 		height,
 		sizeUnit,
@@ -77,6 +78,7 @@ export default function save({ attributes }) {
 			{...blockProps}
 			src={url}
 			alt={alt || ''}
+			title={title || undefined}
 			style={imageStyle}
 			className={`${blockProps.className || ''} simple-image-block__image`.trim()}
 		/>

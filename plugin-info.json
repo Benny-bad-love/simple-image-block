@@ -1,6 +1,6 @@
 {
     "name": "Simple Image Block",
-    "version": "0.1.9",
+    "version": "0.2.1",
     "author": "Ben Grave",
     "requires": "6.0",
     "tested": "6.8.1",

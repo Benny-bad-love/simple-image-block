@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:       Simple Image Block
- * Description:       Super simple image block, no wrapper.
+ * Description:       Super simple image block, no wrapper. Now with Pattern Overrides support for WordPress 6.6+!
  * Requires at least: 6.6
  * Requires PHP:      7.2
- * Version:           0.1.9
+ * Version:           0.2.1
  * Author:            Ben Grave
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html

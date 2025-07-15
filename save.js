@@ -19,17 +19,10 @@ export default function save({ attributes }) {
 	const {
 		url,
 		alt,
+		title,
 		width,
 		height,
 		sizeUnit,
-		maxWidth,
-		maxHeight,
-		maxWidthUnit,
-		maxHeightUnit,
-		minWidth,
-		minHeight,
-		minWidthUnit,
-		minHeightUnit,
 		aspectRatio,
 		objectFit,
 		borderRadius,
@@ -43,6 +36,14 @@ export default function save({ attributes }) {
 		marginBottom,
 		marginLeft,
 		marginUnit,
+		maxWidth,
+		maxHeight,
+		maxWidthUnit,
+		maxHeightUnit,
+		minWidth,
+		minWidthUnit,
+		minHeight,
+		minHeightUnit,
 	} = attributes;
 
 	// Return null if no image URL is set
@@ -77,6 +78,7 @@ export default function save({ attributes }) {
 			{...blockProps}
 			src={url}
 			alt={alt || ''}
+			title={title || undefined}
 			style={imageStyle}
 			className={`${blockProps.className || ''} simple-image-block__image`.trim()}
 		/>

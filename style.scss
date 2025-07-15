@@ -6,16 +6,18 @@
  */
 
 .wp-block-create-block-simple-image-block {
-	display: block;
-	max-width: 100%;
-	height: auto;
-	box-sizing: border-box;
 	margin: 0;
 }
 
+.wp-block-create-block-simple-image-block,
 .simple-image-block__image {
+	box-sizing: border-box;
 	display: block;
 	max-width: 100%;
 	height: auto;
-	box-sizing: border-box;
 }
+
+// .block-editor-page .is-selected.wp-block-create-block-simple-image-block,
+// .block-editor-page .wp-block-create-block-simple-image-block:hover {
+// 	border: 1px solid #4A72B3!important;
+// }

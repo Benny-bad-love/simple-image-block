@@ -44,6 +44,10 @@ import {
 	ColorPalette,
 	Spinner,
 	Notice,
+	FocalPointPicker,
+	ToggleControl,
+	Flex,
+	FlexItem,
 } from '@wordpress/components';
 
 /**
@@ -75,6 +79,11 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 		objectFit,
 		borderRadius,
 		borderRadiusUnit,
+		borderRadiusLinked,
+		borderRadiusTopLeft,
+		borderRadiusTopRight,
+		borderRadiusBottomLeft,
+		borderRadiusBottomRight,
 		borderWidth,
 		borderStyle,
 		borderColor,
@@ -84,6 +93,7 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 		marginBottom,
 		marginLeft,
 		marginUnit,
+		focalPoint,
 	} = attributes;
 
 	const [isLoadingImage, setIsLoadingImage] = useState(false);
@@ -296,7 +306,10 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 		minHeight: minHeight ? minHeight + minHeightUnit : undefined,
 		aspectRatio: aspectRatio || undefined,
 		objectFit: objectFit || undefined,
-		borderRadius: borderRadius ? borderRadius + borderRadiusUnit : undefined,
+		objectPosition: focalPoint ? `${focalPoint.x * 100}% ${focalPoint.y * 100}%` : undefined,
+		borderRadius: borderRadiusLinked
+			? (borderRadius ? borderRadius + borderRadiusUnit : undefined)
+			: `${borderRadiusTopLeft + borderRadiusUnit} ${borderRadiusTopRight + borderRadiusUnit} ${borderRadiusBottomRight + borderRadiusUnit} ${borderRadiusBottomLeft + borderRadiusUnit}`,
 		borderWidth: borderWidth ? borderWidth + 'px' : undefined,
 		borderStyle: borderStyle || undefined,
 		borderColor: borderColor || undefined,
@@ -582,24 +595,111 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 								onChange={(value) => setAttributes({ objectFit: value })}
 							/>
 
-							<div style={{ marginBottom: '24px' }}>
-								<div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-									<span>{__('Border Radius', 'simple-image-block')}</span>
-									<SelectControl
-										value={borderRadiusUnit}
-										options={borderRadiusUnitOptions}
-										onChange={(unit) => setAttributes({ borderRadiusUnit: unit })}
-										__nextHasNoMarginBottom
-										style={{ width: '70px' }}
+							{url && (
+								<div style={{ marginBottom: '24px' }}>
+									<p>{__('Focal Point', 'simple-image-block')}</p>
+									<FocalPointPicker
+										url={url}
+										value={focalPoint || { x: 0.5, y: 0.5 }}
+										onChange={(newFocalPoint) => setAttributes({ focalPoint: newFocalPoint })}
+										style={{ marginBottom: '12px' }}
 									/>
+									<p className="components-base-control__help">
+										{__('Click on the image to set the focal point that will remain visible when the image is cropped.', 'simple-image-block')}
+									</p>
 								</div>
-								<RangeControl
-									value={parseInt(borderRadius) || 0}
-									onChange={(value) => setAttributes({ borderRadius: value.toString() })}
-									min={0}
-									max={borderRadiusUnit === 'px' ? 100 : 50}
-									__nextHasNoMarginBottom
-								/>
+							)}
+
+							<div style={{ marginBottom: '24px' }}>
+								<Flex justify="space-between" align="flex-start" style={{ marginBottom: '8px' }}>
+									<FlexItem>
+										<span>{__('Border Radius', 'simple-image-block')}</span>
+									</FlexItem>
+									<FlexItem>
+										<Flex gap={2}>
+											<FlexItem>
+												<ToggleControl
+													checked={!borderRadiusLinked}
+													onChange={(unlinked) => {
+														if (unlinked) {
+															// When unlinking, set all corners to the current borderRadius value
+															setAttributes({
+																borderRadiusLinked: false,
+																borderRadiusTopLeft: borderRadius || '0',
+																borderRadiusTopRight: borderRadius || '0',
+																borderRadiusBottomLeft: borderRadius || '0',
+																borderRadiusBottomRight: borderRadius || '0'
+															});
+														} else {
+															// When linking, use the top-left value for all
+															setAttributes({
+																borderRadiusLinked: true,
+																borderRadius: borderRadiusTopLeft || '0'
+															});
+														}
+													}}
+													__nextHasNoMarginBottom
+													style={{ margin: 0 }}
+													title={borderRadiusLinked ? __('Unlink corners', 'simple-image-block') : __('Link corners', 'simple-image-block')}
+												/>
+											</FlexItem>
+											<FlexItem>
+												<SelectControl
+													value={borderRadiusUnit}
+													options={borderRadiusUnitOptions}
+													onChange={(unit) => setAttributes({ borderRadiusUnit: unit })}
+													__nextHasNoMarginBottom
+													style={{ width: '70px' }}
+												/>
+											</FlexItem>
+										</Flex>
+									</FlexItem>
+								</Flex>
+
+								{borderRadiusLinked ? (
+									<RangeControl
+										value={parseInt(borderRadius) || 0}
+										onChange={(value) => setAttributes({ borderRadius: value.toString() })}
+										min={0}
+										max={borderRadiusUnit === 'px' ? 100 : 50}
+										__nextHasNoMarginBottom
+									/>
+								) : (
+									<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '8px' }}>
+										<RangeControl
+											label={__('Top Left', 'simple-image-block')}
+											value={parseInt(borderRadiusTopLeft) || 0}
+											onChange={(value) => setAttributes({ borderRadiusTopLeft: value.toString() })}
+											min={0}
+											max={borderRadiusUnit === 'px' ? 100 : 50}
+											__nextHasNoMarginBottom
+										/>
+										<RangeControl
+											label={__('Top Right', 'simple-image-block')}
+											value={parseInt(borderRadiusTopRight) || 0}
+											onChange={(value) => setAttributes({ borderRadiusTopRight: value.toString() })}
+											min={0}
+											max={borderRadiusUnit === 'px' ? 100 : 50}
+											__nextHasNoMarginBottom
+										/>
+										<RangeControl
+											label={__('Bottom Left', 'simple-image-block')}
+											value={parseInt(borderRadiusBottomLeft) || 0}
+											onChange={(value) => setAttributes({ borderRadiusBottomLeft: value.toString() })}
+											min={0}
+											max={borderRadiusUnit === 'px' ? 100 : 50}
+											__nextHasNoMarginBottom
+										/>
+										<RangeControl
+											label={__('Bottom Right', 'simple-image-block')}
+											value={parseInt(borderRadiusBottomRight) || 0}
+											onChange={(value) => setAttributes({ borderRadiusBottomRight: value.toString() })}
+											min={0}
+											max={borderRadiusUnit === 'px' ? 100 : 50}
+											__nextHasNoMarginBottom
+										/>
+									</div>
+								)}
 							</div>
 
 							<PanelBody title={__('Border Settings', 'simple-image-block')} initialOpen={false}>

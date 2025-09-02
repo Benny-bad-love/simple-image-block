@@ -17,6 +17,20 @@
 	height: auto;
 }
 
+/* Ensure focal point positioning works correctly */
+.simple-image-block__image {
+	/* Object-fit and object-position work together for focal point */
+	object-fit: cover; /* Default to cover for best focal point behavior */
+}
+
+/* Border radius supports both linked (single value) and individual corner values */
+/* Individual corners are applied via inline styles as: top-left top-right bottom-right bottom-left */
+
+/* When object-fit is set to cover, object-position will control the focal point */
+.simple-image-block__image[style*="object-fit: cover"] {
+	/* The object-position is set inline via the style attribute */
+}
+
 // .block-editor-page .is-selected.wp-block-create-block-simple-image-block,
 // .block-editor-page .wp-block-create-block-simple-image-block:hover {
 // 	border: 1px solid #4A72B3!important;

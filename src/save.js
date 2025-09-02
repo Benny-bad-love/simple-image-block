@@ -27,6 +27,11 @@ export default function save({ attributes }) {
 		objectFit,
 		borderRadius,
 		borderRadiusUnit,
+		borderRadiusLinked,
+		borderRadiusTopLeft,
+		borderRadiusTopRight,
+		borderRadiusBottomLeft,
+		borderRadiusBottomRight,
 		borderWidth,
 		borderStyle,
 		borderColor,
@@ -44,6 +49,7 @@ export default function save({ attributes }) {
 		minWidthUnit,
 		minHeight,
 		minHeightUnit,
+		focalPoint,
 	} = attributes;
 
 	// Return null if no image URL is set
@@ -60,7 +66,10 @@ export default function save({ attributes }) {
 		minHeight: minHeight ? minHeight + minHeightUnit : undefined,
 		aspectRatio: aspectRatio || undefined,
 		objectFit: objectFit || undefined,
-		borderRadius: borderRadius ? borderRadius + borderRadiusUnit : undefined,
+		objectPosition: focalPoint ? `${focalPoint.x * 100}% ${focalPoint.y * 100}%` : undefined,
+		borderRadius: borderRadiusLinked
+			? (borderRadius ? borderRadius + borderRadiusUnit : undefined)
+			: `${borderRadiusTopLeft + borderRadiusUnit} ${borderRadiusTopRight + borderRadiusUnit} ${borderRadiusBottomRight + borderRadiusUnit} ${borderRadiusBottomLeft + borderRadiusUnit}`,
 		borderWidth: borderWidth ? borderWidth + 'px' : undefined,
 		borderStyle: borderStyle || undefined,
 		borderColor: borderColor || undefined,

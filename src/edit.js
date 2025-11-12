@@ -67,6 +67,8 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 		width,
 		height,
 		sizeUnit,
+		widthUnit,
+		heightUnit,
 		maxWidth,
 		maxHeight,
 		maxWidthUnit,
@@ -95,6 +97,10 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 		marginUnit,
 		focalPoint,
 	} = attributes;
+
+	// Backward compatibility: use sizeUnit if separate units aren't set
+	const effectiveWidthUnit = widthUnit || sizeUnit || 'px';
+	const effectiveHeightUnit = heightUnit || sizeUnit || 'px';
 
 	const [isLoadingImage, setIsLoadingImage] = useState(false);
 	const [availableSizes, setAvailableSizes] = useState([]);
@@ -298,8 +304,8 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 	};
 
 	const imageStyle = {
-		width: width ? width + sizeUnit : undefined,
-		height: height ? height + sizeUnit : undefined,
+		width: width ? width + effectiveWidthUnit : undefined,
+		height: height ? height + effectiveHeightUnit : undefined,
 		maxWidth: maxWidth ? maxWidth + maxWidthUnit : undefined,
 		maxHeight: maxHeight ? maxHeight + maxHeightUnit : undefined,
 		minWidth: minWidth ? minWidth + minWidthUnit : undefined,
@@ -447,7 +453,7 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 							<div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
 								<UnitControl
 									label={__('Width', 'simple-image-block')}
-									value={width ? width + sizeUnit : ''}
+									value={width ? width + effectiveWidthUnit : ''}
 									onChange={(value) => {
 										if (!value) {
 											setAttributes({ width: undefined });
@@ -457,18 +463,20 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 										const unit = value.replace(/[0-9.]/g, '');
 										setAttributes({
 											width: numericValue,
-											sizeUnit: unit || 'px'
+											widthUnit: unit || 'px'
 										});
 									}}
 									units={[
 										{ value: 'px', label: 'px' },
 										{ value: '%', label: '%' },
 										{ value: 'vw', label: 'vw' },
+										{ value: 'em', label: 'em' },
+										{ value: 'rem', label: 'rem' },
 									]}
 								/>
 								<UnitControl
 									label={__('Height', 'simple-image-block')}
-									value={height ? height + sizeUnit : ''}
+									value={height ? height + effectiveHeightUnit : ''}
 									onChange={(value) => {
 										if (!value) {
 											setAttributes({ height: undefined });
@@ -478,13 +486,15 @@ export default function Edit({ attributes, setAttributes, context, isSelected })
 										const unit = value.replace(/[0-9.]/g, '');
 										setAttributes({
 											height: numericValue,
-											sizeUnit: unit || 'px'
+											heightUnit: unit || 'px'
 										});
 									}}
 									units={[
 										{ value: 'px', label: 'px' },
 										{ value: '%', label: '%' },
 										{ value: 'vh', label: 'vh' },
+										{ value: 'em', label: 'em' },
+										{ value: 'rem', label: 'rem' },
 									]}
 								/>
 							</div>

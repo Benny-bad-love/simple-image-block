@@ -23,6 +23,8 @@ export default function save({ attributes }) {
 		width,
 		height,
 		sizeUnit,
+		widthUnit,
+		heightUnit,
 		aspectRatio,
 		objectFit,
 		borderRadius,
@@ -52,14 +54,18 @@ export default function save({ attributes }) {
 		focalPoint,
 	} = attributes;
 
+	// Backward compatibility: use sizeUnit if separate units aren't set
+	const effectiveWidthUnit = widthUnit || sizeUnit || 'px';
+	const effectiveHeightUnit = heightUnit || sizeUnit || 'px';
+
 	// Return null if no image URL is set
 	if (!url) {
 		return null;
 	}
 
 	const imageStyle = {
-		width: width ? width + sizeUnit : undefined,
-		height: height ? height + sizeUnit : undefined,
+		width: width ? width + effectiveWidthUnit : undefined,
+		height: height ? height + effectiveHeightUnit : undefined,
 		maxWidth: maxWidth ? maxWidth + maxWidthUnit : undefined,
 		maxHeight: maxHeight ? maxHeight + maxHeightUnit : undefined,
 		minWidth: minWidth ? minWidth + minWidthUnit : undefined,

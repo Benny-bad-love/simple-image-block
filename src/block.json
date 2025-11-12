@@ -55,13 +55,21 @@
 		"height": {
 			"type": "string"
 		},
-		"sizeUnit": {
-			"type": "string",
-			"default": "px"
-		},
-		"maxWidth": {
-			"type": "string"
-		},
+	"sizeUnit": {
+		"type": "string",
+		"default": "px"
+	},
+	"widthUnit": {
+		"type": "string",
+		"default": "px"
+	},
+	"heightUnit": {
+		"type": "string",
+		"default": "px"
+	},
+	"maxWidth": {
+		"type": "string"
+	},
 		"maxHeight": {
 			"type": "string"
 		},

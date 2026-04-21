@@ -49,3 +49,8 @@ Thumbs.db
 /save.js
 /editor.scss
 /style.scss
+
+# Keep local npm metadata out of the repo
+/package.json
+/package-lock.json
+

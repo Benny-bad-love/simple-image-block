@@ -1,8 +1,8 @@
 === Simple Image Block ===
 Contributors:      The WordPress Contributors
 Tags:              block, image, gutenberg, media, patterns, overrides
-Tested up to:      6.8.1
-Stable tag:        0.2.2
+Tested up to:      6.9.4
+Stable tag:        0.2.3
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,9 @@ Yes! The plugin will check for updates from the GitHub repository automatically.
 4. Pattern overrides in action with synced patterns
 
 == Changelog ==
+
+= 0.2.3 =
+* Removed package.json and package-lock.json from the plugin
 
 = 0.2.2 =
 * Added controls for image focus and border-radius corners

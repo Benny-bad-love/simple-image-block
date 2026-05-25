@@ -4,7 +4,7 @@
  * Description:       Super simple image block, no wrapper. Includes Pattern Overrides support for WordPress 7.0+.
  * Requires at least: 6.6
  * Requires PHP:      7.2
- * Version:           0.2.4
+ * Version:           0.2.5
  * Author:            Ben Grave
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
